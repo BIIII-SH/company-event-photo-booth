@@ -167,7 +167,34 @@ Continue →
 
 
 </div>
+<!-- Camera Screen -->
+<div id="cameraScreen" class="hidden">
 
+    <div class="camera-header">
+        <button id="backBtn">← Back</button>
+        <h2>Preparing Camera...</h2>
+    </div>
+
+    <div class="camera-container">
+
+        <video
+            id="cameraPreview"
+            autoplay
+            playsinline
+            muted>
+        </video>
+
+    </div>
+
+    <div class="camera-footer">
+
+        <button id="captureBtn" disabled>
+            📸
+        </button>
+
+    </div>
+
+</div>
 
 <p class="privacy-note">
 
