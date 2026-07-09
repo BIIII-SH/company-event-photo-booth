@@ -156,4 +156,97 @@ button:hover{
 
     }
 
+}.company-logo{
+
+    width:120px;
+
+    height:120px;
+
+    object-fit:contain;
+
+    margin-bottom:20px;
+
+}
+
+
+.hidden{
+
+    display:none;
+
+}
+
+
+.instruction{
+
+    color:#555;
+
+    line-height:1.5;
+
+    margin-bottom:25px;
+
+}
+
+
+h3{
+
+    text-align:left;
+
+    margin-top:20px;
+
+    margin-bottom:10px;
+
+    color:#005BAC;
+
+}
+
+
+.options{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-bottom:10px;
+
+}
+
+
+.option-card{
+
+    flex:1;
+
+    padding:15px 8px;
+
+    border-radius:15px;
+
+    border:2px solid #dbeeff;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    background:white;
+
+}
+
+
+.option-card span{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:14px;
+
+}
+
+
+.option-card.selected{
+
+    border-color:#005BAC;
+
+    background:#eaf4ff;
+
+    transform:translateY(-3px);
+
 }
