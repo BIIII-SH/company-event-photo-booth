@@ -1,237 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Company Event Photo Booth</title>
+    <title>The Heroes Next Door</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Welcome Screen -->
-    <section id="homeScreen" class="screen">
+<div class="background"></div>
 
-        <div class="card">
+<div class="card">
 
-            <div class="heroIcon">
-                🦸
-            </div>
+    <div class="hero-icon">
+        🛡️
+    </div>
 
-            <h1>
-                The Heroes Next Door
-            </h1>
+    <h1>The Heroes Next Door</h1>
 
-            <h2>
-                Heroes At Home, Heroes At Work
-            </h2>
+    <h2>Heroes At Home,<br>Heroes At Work</h2>
 
-            <p class="occasion">
-                National Heroes Day 2026
-            </p>
+    <p class="occasion">
+        National Heroes Day 2026
+    </p>
 
-            <p class="description">
-                Celebrate the everyday heroes who inspire us
-                at home and in the workplace.
+    <p class="message">
+        Every day, heroes walk beside us.
+        Today, we celebrate the people who make a difference at home,
+        in the workplace, and in every life they touch.
+    </p>
 
-                Capture your commemorative photo and
-                celebrate this special occasion with us!
-            </p>
+    <button id="startBtn">
+        Start
+    </button>
 
-            <hr>
+</div>
 
-            <!-- Layout -->
-            <div class="settingGroup">
-
-                <h3>Photo Layout</h3>
-
-                <label>
-                    <input
-                        type="radio"
-                        name="layout"
-                        value="square"
-                        checked>
-
-                    Square
-                </label>
-
-                <label>
-                    <input
-                        type="radio"
-                        name="layout"
-                        value="portrait">
-
-                    Portrait
-                </label>
-
-            </div>
-
-            <hr>
-
-            <!-- Camera -->
-
-            <div class="settingGroup">
-
-                <h3>Camera</h3>
-
-                <label>
-                    <input
-                        type="radio"
-                        name="camera"
-                        value="user"
-                        checked>
-
-                    Front Camera
-                </label>
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="camera"
-                        value="environment">
-
-                    Rear Camera
-
-                </label>
-
-            </div>
-
-            <hr>
-
-            <!-- Countdown -->
-
-            <div class="settingGroup">
-
-                <h3>Countdown</h3>
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="countdown"
-                        value="0"
-                        checked>
-
-                    None
-
-                </label>
-
-                <label>
-
-                    <input
-                        type="radio"
-                        name="countdown"
-                        value="3">
-
-                    3 Seconds
-
-                </label>
-
-            </div>
-
-            <button id="startButton">
-
-                📸 Start Camera
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- Camera Screen -->
-
-    <section
-        id="cameraScreen"
-        class="screen hidden">
-
-        <div class="cameraContainer">
-
-            <video
-                id="video"
-                autoplay
-                playsinline>
-            </video>
-
-            <!-- Frame Overlay -->
-
-            <img
-                id="frameOverlay"
-                src=""
-                alt="Frame">
-
-            <button id="captureButton">
-
-                📸 Capture
-
-            </button>
-
-            <button id="backButton">
-
-                ← Back
-
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- Preview Screen -->
-
-    <section
-        id="previewScreen"
-        class="screen hidden">
-
-        <div class="card">
-
-            <h2>
-
-                ❤️ Thank You!
-
-            </h2>
-
-            <p>
-
-                Thank you for celebrating
-                <strong>National Heroes Day 2026</strong>.
-
-                Together, we honor the everyday heroes
-                who inspire us at home and at work.
-
-            </p>
-
-            <img
-                id="previewImage"
-                alt="Preview">
-
-            <div class="buttonRow">
-
-                <button id="downloadButton">
-
-                    ⬇ Download
-
-                </button>
-
-                <button id="retakeButton">
-
-                    🔄 Retake
-
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
-
 </html>

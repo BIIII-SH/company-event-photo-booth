@@ -1,71 +1,64 @@
-/* ========= RESET ========= */
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
 }
-
-/* ========= BODY ========= */
 
 body{
 
-    background:#edf4ff;
+    font-family:Inter,sans-serif;
+
+    background:#eef6ff;
+
     min-height:100vh;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
-    padding:30px;
-
-    color:#16345d;
+    padding:25px;
 
 }
 
-/* ========= SCREENS ========= */
+.background{
 
-.screen{
+    position:fixed;
 
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    inset:0;
 
-}
+    background:
+    radial-gradient(circle at top right,#b7d7ff,transparent 45%),
+    radial-gradient(circle at bottom left,#dbeeff,transparent 45%);
 
-.hidden{
-
-    display:none;
+    z-index:-1;
 
 }
-
-/* ========= CARD ========= */
 
 .card{
 
-    width:100%;
-    max-width:520px;
-
     background:white;
+
+    width:100%;
+
+    max-width:430px;
 
     border-radius:24px;
 
-    padding:40px;
+    padding:45px 35px;
 
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.12);
+    text-align:center;
+
+    box-shadow:0 15px 45px rgba(0,0,0,.10);
+
+    animation:fadeUp .7s ease;
 
 }
 
-/* ========= HERO ========= */
+.hero-icon{
 
-.heroIcon{
-
-    font-size:70px;
-
-    text-align:center;
+    font-size:58px;
 
     margin-bottom:20px;
 
@@ -73,98 +66,59 @@ body{
 
 h1{
 
-    text-align:center;
-    color:#0f4fa8;
+    font-family:Poppins,sans-serif;
 
-    margin-bottom:8px;
+    color:#005BAC;
+
+    font-size:32px;
+
+    margin-bottom:10px;
 
 }
 
 h2{
 
-    text-align:center;
+    color:#2F4F6F;
 
-    font-weight:400;
+    font-size:20px;
 
-    margin-bottom:12px;
+    font-weight:600;
+
+    margin-bottom:18px;
 
 }
 
 .occasion{
 
-    text-align:center;
+    color:#005BAC;
 
-    color:#4e79b7;
-
-    font-weight:bold;
-
-    margin-bottom:25px;
-
-}
-
-.description{
-
-    text-align:center;
-
-    line-height:1.6;
+    font-weight:600;
 
     margin-bottom:20px;
 
 }
 
-/* ========= DIVIDERS ========= */
+.message{
 
-hr{
+    color:#555;
 
-    margin:20px 0;
+    line-height:1.7;
 
-    border:none;
-
-    border-top:1px solid #d7e5fb;
+    margin-bottom:35px;
 
 }
-
-/* ========= SETTINGS ========= */
-
-.settingGroup h3{
-
-    margin-bottom:12px;
-
-    color:#0f4fa8;
-
-}
-
-.settingGroup label{
-
-    display:block;
-
-    padding:10px 0;
-
-    cursor:pointer;
-
-}
-
-input[type=radio]{
-
-    margin-right:10px;
-
-}
-
-/* ========= BUTTON ========= */
 
 button{
 
     width:100%;
 
-    padding:18px;
-
-    margin-top:30px;
-
     border:none;
 
     border-radius:15px;
 
-    background:#1565c0;
+    padding:16px;
+
+    background:#005BAC;
 
     color:white;
 
@@ -178,76 +132,28 @@ button{
 
 button:hover{
 
-    background:#0d47a1;
-
     transform:translateY(-2px);
 
-}
-
-/* ========= CAMERA ========= */
-
-.cameraContainer{
-
-    position:relative;
-
-    width:100%;
-
-    max-width:500px;
+    background:#004A92;
 
 }
 
-video{
+@keyframes fadeUp{
 
-    width:100%;
+    from{
 
-    border-radius:20px;
+        opacity:0;
 
-    background:black;
+        transform:translateY(25px);
 
-}
+    }
 
-#frameOverlay{
+    to{
 
-    position:absolute;
+        opacity:1;
 
-    top:0;
-    left:0;
+        transform:translateY(0);
 
-    width:100%;
-    height:100%;
-
-    object-fit:contain;
-
-    pointer-events:none;
-
-}
-
-/* ========= PREVIEW ========= */
-
-#previewImage{
-
-    width:100%;
-
-    margin-top:25px;
-
-    border-radius:20px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-
-}
-
-.buttonRow{
-
-    display:flex;
-
-    gap:15px;
-
-    margin-top:25px;
-
-}
-
-.buttonRow button{
-
-    margin-top:0;
+    }
 
 }
