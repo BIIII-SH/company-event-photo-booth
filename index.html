@@ -96,6 +96,12 @@ Customize your photo experience before capturing your hero moment.
 </div>
 
 
+<div class="option-card" data-frame="landscape">
+    ▭
+    <span>Landscape</span>
+</div>
+
+
 </div>
 
 
@@ -184,6 +190,11 @@ Continue →
         muted>
     </video>
 
+    <canvas
+        id="photoCanvas"
+        class="hidden">
+    </canvas>
+
     <img
         id="devPreview"
         class="hidden"
@@ -201,6 +212,12 @@ Continue →
         class="frame-overlay hidden"
         src="assets/frame-portrait.png"
         alt="Portrait Frame">
+    
+    <img
+        id="landscapeFrame"
+        class="frame-overlay hidden"
+        src="assets/frame-landscape.png"
+        alt="Landscape Frame">
 
 </div>
 
