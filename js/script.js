@@ -1,4 +1,18 @@
+// =====================================================
+// Company Event Photo Booth
+// Version: v0.4.0 (Feature Branch)
+// =====================================================
+
 document.addEventListener("DOMContentLoaded", () => {
+    const APP_CONFIG = {
+
+    DEV_MODE: true
+
+};
+
+    // =====================================================
+    // DOM Elements
+    // =====================================================
 
     const startButton = document.getElementById("startBtn");
     const setupScreen = document.getElementById("setupScreen");
@@ -6,13 +20,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const cameraScreen = document.getElementById("cameraScreen");
     const backButton = document.getElementById("backBtn");
     const cameraPreview = document.getElementById("cameraPreview");
-const cameraTitle = document.querySelector(".camera-header h2");
+    const cameraTitle = document.querySelector(".camera-header h2");
+    const squareFrame = document.getElementById("squareFrame");
+    const portraitFrame = document.getElementById("portraitFrame");
 
-let currentStream = null;
+    const devPreview = document.getElementById("devPreview");
 
-    
+    // =====================================================
+    // Application State
+    // =====================================================
 
+    let currentStream = null;
 
+    // =====================================================
+    // Option Card Selection
+    // =====================================================
+
+    const optionCards = ...
+
+    // =====================================================
+    // Event Listeners
+    // =====================================================
 
     startButton.addEventListener("click", () => {
 
@@ -55,11 +83,25 @@ let currentStream = null;
 
 backButton.addEventListener("click", () => {
 
+    if (APP_CONFIG.DEV_MODE) {
+
+    devPreview.classList.add("hidden");
+
+    cameraPreview.classList.remove("hidden");
+
+    return;
+
+}
+
     stopCamera();
 
     showScreen(setupScreen);
 
 });
+
+    // =====================================================
+    // Screen Navigation
+    // =====================================================
 
     function showScreen(screen) {
 
@@ -69,7 +111,25 @@ backButton.addEventListener("click", () => {
     screen.classList.remove("hidden");
 
 }
-async function startCamera() {
+
+    // =====================================================
+    // Camera Functions
+    // =====================================================
+
+    async function startCamera() {
+        if (APP_CONFIG.DEV_MODE) {
+
+        cameraPreview.classList.add("hidden");
+
+        devPreview.classList.remove("hidden");
+            
+    updateFrameOverlay();
+
+    cameraTitle.textContent = "Developer Preview";
+
+    return;
+
+}
 
     try {
 
@@ -116,6 +176,29 @@ function stopCamera() {
     currentStream.getTracks().forEach(track => track.stop());
 
     currentStream = null;
+
+}
+
+    // =====================================================
+    // Overlay Functions
+    // =====================================================
+
+function updateFrameOverlay() {
+
+    const selectedFrame =
+        document.querySelector("[data-frame].selected").dataset.frame;
+
+    if (selectedFrame === "square") {
+
+        squareFrame.classList.remove("hidden");
+        portraitFrame.classList.add("hidden");
+
+    } else {
+
+        portraitFrame.classList.remove("hidden");
+        squareFrame.classList.add("hidden");
+
+    }
 
 }
 

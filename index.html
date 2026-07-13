@@ -177,14 +177,32 @@ Continue →
 
     <div class="camera-container">
 
-        <video
-            id="cameraPreview"
-            autoplay
-            playsinline
-            muted>
-        </video>
+    <video
+        id="cameraPreview"
+        autoplay
+        playsinline
+        muted>
+    </video>
 
-    </div>
+    <img
+        id="devPreview"
+        class="hidden"
+        src="assets/camera-placeholder.jpg"
+        alt="Developer Preview">
+
+    <img
+        id="squareFrame"
+        class="frame-overlay"
+        src="assets/frame-square.png"
+        alt="Square Frame">
+
+    <img
+        id="portraitFrame"
+        class="frame-overlay hidden"
+        src="assets/frame-portrait.png"
+        alt="Portrait Frame">
+
+</div>
 
     <div class="camera-footer">
 
