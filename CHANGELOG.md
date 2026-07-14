@@ -61,3 +61,19 @@ Action Taken:
 - Reset to v0.3.1
 - Created dedicated feature branch
 - Overlay will be redesigned using a layered architecture.
+
+--
+
+## v0.4.1 – Dynamic Frame System
+
+### Added
+- Added Landscape (16:9) frame support.
+- Introduced FRAME_PRESETS architecture.
+- Added dynamic preview aspect ratio switching.
+- Added dynamic overlay management.
+- Improved Developer Preview behavior.
+
+### Improved
+- Refactored overlay system to support unlimited frame presets.
+- Preview now accurately matches selected frame dimensions.
+- Improved code organization for future capture and export features.

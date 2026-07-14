@@ -50,6 +50,8 @@ Develop a professional, browser-based photo booth application for company events
 * [ ] Layered camera architecture
 * [ ] Cross-device testing
 
+**v0.4.1** - Dynamic Frame System ✅
+
 ---
 
 # Phase 3 – Photo Capture

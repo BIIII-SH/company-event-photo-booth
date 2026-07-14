@@ -173,63 +173,117 @@ Continue →
 
 
 </div>
+<!-- ===================================================== -->
 <!-- Camera Screen -->
+<!-- ===================================================== -->
 <div id="cameraScreen" class="hidden">
 
+    <!-- Header -->
     <div class="camera-header">
-        <button id="backBtn">← Back</button>
         <h2>Preparing Camera...</h2>
     </div>
 
+    <!-- Camera Preview -->
     <div class="camera-container">
 
-    <video
-        id="cameraPreview"
-        autoplay
-        playsinline
-        muted>
-    </video>
+        <video
+            id="cameraPreview"
+            autoplay
+            playsinline
+            muted>
+        </video>
 
-    <canvas
-        id="photoCanvas"
-        class="hidden">
-    </canvas>
+        <canvas
+            id="photoCanvas"
+            class="hidden">
+        </canvas>
 
-    <img
-        id="devPreview"
-        class="hidden"
-        src="assets/camera-placeholder.jpg"
-        alt="Developer Preview">
+        <img
+            id="devPreview"
+            class="hidden"
+            src="assets/camera-placeholder.jpg"
+            alt="Developer Preview">
 
-    <img
-        id="squareFrame"
-        class="frame-overlay"
-        src="assets/frame-square.png"
-        alt="Square Frame">
+        <!-- Frame Overlays -->
+        <img
+            id="squareFrame"
+            class="frame-overlay"
+            src="assets/frame-square.png"
+            alt="Square Frame">
 
-    <img
-        id="portraitFrame"
-        class="frame-overlay hidden"
-        src="assets/frame-portrait.png"
-        alt="Portrait Frame">
-    
-    <img
-        id="landscapeFrame"
-        class="frame-overlay hidden"
-        src="assets/frame-landscape.png"
-        alt="Landscape Frame">
+        <img
+            id="portraitFrame"
+            class="frame-overlay hidden"
+            src="assets/frame-portrait.png"
+            alt="Portrait Frame">
 
-</div>
+        <img
+            id="landscapeFrame"
+            class="frame-overlay hidden"
+            src="assets/frame-landscape.png"
+            alt="Landscape Frame">
 
+    </div>
+
+    <!-- Camera Controls -->
     <div class="camera-footer">
 
-        <button id="captureBtn" disabled>
+        <button
+            id="captureBtn"
+            class="primary-btn"
+            type="button">
             📸
+        </button>
+
+        <button
+            id="backBtn"
+            type="button">
+            ← Back
         </button>
 
     </div>
 
 </div>
+
+
+<!-- ===================================================== -->
+<!-- Preview Screen -->
+<!-- ===================================================== -->
+<section id="previewScreen" class="hidden">
+
+    <!-- Header -->
+    <div class="camera-header">
+        <h2>Preview</h2>
+    </div>
+
+    <!-- Preview -->
+    <div class="camera-container">
+
+        <img
+            id="capturedPhoto"
+            alt="Captured Photo">
+
+    </div>
+
+    <!-- Preview Controls -->
+    <div class="camera-footer">
+
+        <button
+            id="retakeBtn"
+            type="button">
+            🔄 Retake
+        </button>
+
+        <button
+            id="continuePhotoBtn"
+            class="primary-btn"
+            type="button">
+            Continue →
+        </button>
+
+    </div>
+
+</section>
 
 <p class="privacy-note">
 

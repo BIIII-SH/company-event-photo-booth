@@ -19,10 +19,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const startButton = document.getElementById("startBtn");
     const continueButton = document.getElementById("continueBtn");
     const backButton = document.getElementById("backBtn");
+    const captureButton = document.getElementById("captureBtn");
+    const retakeButton = document.getElementById("retakeBtn");
+    const continuePhotoButton = document.getElementById("continuePhotoBtn");
 
     // Screens
     const setupScreen = document.getElementById("setupScreen");
     const cameraScreen = document.getElementById("cameraScreen");
+    const previewScreen = document.getElementById("previewScreen");
+    const capturedPhoto = document.getElementById("capturedPhoto");
     
     // Camera
     const cameraPreview = document.getElementById("cameraPreview");
@@ -104,6 +109,19 @@ document.addEventListener("DOMContentLoaded", () => {
         showScreen(setupScreen);
     });
 
+    captureButton.addEventListener("click", () => {
+        capturedPhoto.src = devPreview.src;
+        showScreen(previewScreen);
+    });
+
+    retakeButton.addEventListener("click", () => {
+        showScreen(cameraScreen);
+    });
+
+    continuePhotoButton.addEventListener("click", () => {
+        alert("Coming in v0.6.0");
+    });
+
 
     // =====================================================
     // Screen Navigation
@@ -111,6 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function showScreen(screen) {
         setupScreen.classList.add("hidden");
         cameraScreen.classList.add("hidden");
+        previewScreen.classList.add("hidden");
+
         screen.classList.remove("hidden");
     }
 
