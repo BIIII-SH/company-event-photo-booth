@@ -4,6 +4,39 @@ All notable changes to this project are documented here.
 
 ---
 
+## v0.4.2 - Architecture Cleanup
+
+### Added
+
+- Project architecture documentation
+- Coding standards documentation
+- Development workflow guide
+
+### Changed
+
+- Refactored application initialization
+- Introduced APP_STATE
+- Improved project organization
+- Simplified DOMContentLoaded initialization
+
+--
+
+## v0.4.1 – Dynamic Frame System
+
+### Added
+- Added Landscape (16:9) frame support.
+- Introduced FRAME_PRESETS architecture.
+- Added dynamic preview aspect ratio switching.
+- Added dynamic overlay management.
+- Improved Developer Preview behavior.
+
+### Improved
+- Refactored overlay system to support unlimited frame presets.
+- Preview now accurately matches selected frame dimensions.
+- Improved code organization for future capture and export features.
+
+--
+
 ## v0.3.1 - Camera Foundation
 
 Status: 🟢 Stable
@@ -63,17 +96,3 @@ Action Taken:
 - Overlay will be redesigned using a layered architecture.
 
 --
-
-## v0.4.1 – Dynamic Frame System
-
-### Added
-- Added Landscape (16:9) frame support.
-- Introduced FRAME_PRESETS architecture.
-- Added dynamic preview aspect ratio switching.
-- Added dynamic overlay management.
-- Improved Developer Preview behavior.
-
-### Improved
-- Refactored overlay system to support unlimited frame presets.
-- Preview now accurately matches selected frame dimensions.
-- Improved code organization for future capture and export features.

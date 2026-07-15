@@ -22,3 +22,11 @@ All project documentation is inside the **docs** folder.
 - BUGS.md
 - IDEAS.md
 - PROJECT_GUIDE.md
+
+## Documentation
+
+The project documentation can be found in the `/docs` directory.
+
+- Architecture Guide
+- Coding Standards
+- Development Workflow

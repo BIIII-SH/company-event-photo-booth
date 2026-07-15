@@ -121,58 +121,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     // =====================================================
-    // Option Card Selection
+    // Initialization
     // =====================================================
-    const optionCards = document.querySelectorAll(".option-card");
-
-    optionCards.forEach(card => {
-        card.addEventListener("click", () => {
-            const group = card.parentElement;
-
-            group.querySelectorAll(".option-card")
-                .forEach(item => {
-                    item.classList.remove("selected");
-                });
-
-            card.classList.add("selected");
-        });
-    });
+    initializeOptionCards();
+    initializeEventListeners();
 
 
     // =====================================================
-    // Event Listeners
-    // =====================================================
-    startButton.addEventListener("click", () => {
-        startButton.style.display = "none";
-        setupScreen.classList.remove("hidden");
-    });
-
-    continueButton.addEventListener("click", async () => {
-        showScreen(cameraScreen);
-        await startCamera();
-    });
-    
-    backButton.addEventListener("click", () => {
-        stopCamera();
-        showScreen(setupScreen);
-    });
-
-    captureButton.addEventListener("click", () => {
-        capturedPhoto.src = devPreview.src;
-        showScreen(previewScreen);
-    });
-
-    retakeButton.addEventListener("click", () => {
-        showScreen(cameraScreen);
-    });
-
-    continuePhotoButton.addEventListener("click", () => {
-        alert("Coming in v0.6.0");
-    });
-
-
-    // =====================================================
-    // Screen Navigation
+    // Screen Navigation (functions)
     // =====================================================
     function showScreen(screen) {
         setupScreen.classList.add("hidden");
@@ -181,6 +137,65 @@ document.addEventListener("DOMContentLoaded", () => {
 
         screen.classList.remove("hidden");
     }
+
+    function initializeOptionCards() {
+
+        const optionCards = document.querySelectorAll(".option-card");
+
+        optionCards.forEach(card => {
+
+            card.addEventListener("click", () => {
+
+                const group = card.parentElement;
+
+                group.querySelectorAll(".option-card")
+                    .forEach(item => {
+                        item.classList.remove("selected");
+                    });
+
+                card.classList.add("selected");
+
+            });
+
+        });
+
+    }
+
+    function initializeEventListeners() {
+
+        startButton.addEventListener("click", () => {
+            startButton.style.display = "none";
+            setupScreen.classList.remove("hidden");
+        });
+
+        continueButton.addEventListener("click", async () => {
+            showScreen(cameraScreen);
+            await startCamera();
+        });
+    
+        backButton.addEventListener("click", () => {
+            stopCamera();
+            showScreen(setupScreen);
+        });
+
+        captureButton.addEventListener("click", () => {
+            if (APP_CONFIG.DEV_MODE) {
+                capturedPhoto.src = devPreview.src;
+            } else {
+                captureCurrentFrame();
+            }
+            showScreen(previewScreen);
+        });
+
+        retakeButton.addEventListener("click", () => {
+            showScreen(cameraScreen);
+        });
+        
+        continuePhotoButton.addEventListener("click", () => {
+            alert("Coming in v0.6.0");
+        });
+
+    }   
 
     // =====================================================
     // Camera Functions
@@ -239,6 +254,31 @@ document.addEventListener("DOMContentLoaded", () => {
             APP_STATE.currentStream = null;
             cameraPreview.srcObject = null;
         }
+    }
+
+    function captureCurrentFrame() {
+        const canvas = photoCanvas;
+
+        const context = canvas.getContext("2d");
+
+        canvas.width = cameraPreview.videoWidth;
+        canvas.height = cameraPreview.videoHeight;
+
+        context.drawImage(
+            cameraPreview,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        renderFinalPhoto();
+    }
+
+    function renderFinalPhoto() {
+
+        capturedPhoto.src = photoCanvas.toDataURL("image/png");
+
     }
 
 
