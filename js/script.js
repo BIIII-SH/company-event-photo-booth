@@ -63,6 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
         portrait: portraitFrame,
         landscape: landscapeFrame
     };
+
+    function getCurrentFrameOverlay() {
+        return frameOverlays[APP_STATE.selectedFrame];
+    }
+
+    function getCurrentCameraMode() {
+        return CAMERA_MODES[APP_STATE.selectedFrame];
+    }
     
 
     // =====================================================
@@ -119,11 +127,50 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    const CAMERA_MODES = {
+        square: {
+            aspectRatio: 1,
+
+            canvasWidth: 1080,
+
+            canvasHeight: 1080,
+
+            frameId: "square"
+        },
+
+        portrait: {
+
+            aspectRatio: 1240 / 1748,
+
+            canvasWidth: 1240,
+
+            canvasHeight: 1748,
+
+            frameId: "portrait"
+
+        },
+
+        landscape: {
+
+            aspectRatio: 16 / 9,
+
+            canvasWidth: 1920,
+
+            canvasHeight: 1080,
+
+            frameId: "landscape"
+
+        }
+    
+    };
+
 
     // =====================================================
     // Initialization
     // =====================================================
-    initializeOptionCards();
+    initializeFrameSelector();
+    initializeCameraSelector();
+    initializeCountdownSelector();
     initializeEventListeners();
 
 
@@ -138,27 +185,69 @@ document.addEventListener("DOMContentLoaded", () => {
         screen.classList.remove("hidden");
     }
 
-    function initializeOptionCards() {
+    function initializeFrameSelector() {
 
-        const optionCards = document.querySelectorAll(".option-card");
+        const frameCards = document.querySelectorAll("[data-frame]");
 
-        optionCards.forEach(card => {
+        frameCards.forEach(card => {
 
             card.addEventListener("click", () => {
 
-                const group = card.parentElement;
+                // Remove previous selection
+                frameCards.forEach(item =>
+                    item.classList.remove("selected")
+                );
 
-                group.querySelectorAll(".option-card")
-                    .forEach(item => {
-                        item.classList.remove("selected");
-                    });
+                // Select current card
+                card.classList.add("selected");
+
+                // Update application state
+                APP_STATE.selectedFrame = card.dataset.frame;
+
+                // Refresh UI
+                updateFrameOverlay();
+                updatePreviewLayout();
+            });
+        });
+    }
+
+    function initializeCameraSelector() {
+
+        const cameraCards = document.querySelectorAll("[data-camera]");
+
+        cameraCards.forEach(card => {
+
+            card.addEventListener("click", () => {
+
+                cameraCards.forEach(item =>
+                    item.classList.remove("selected")
+                );
 
                 card.classList.add("selected");
 
+                APP_STATE.selectedCamera = card.dataset.camera;
             });
-
         });
+    }
 
+    function initializeCountdownSelector() {
+
+        const countdownCards = document.querySelectorAll("[data-countdown]");
+
+        countdownCards.forEach(card => {
+
+            card.addEventListener("click", () => {
+
+                countdownCards.forEach(item =>
+                    item.classList.remove("selected")
+                );
+
+                card.classList.add("selected");
+
+                APP_STATE.selectedCountdown =
+                    Number(card.dataset.countdown);
+            });
+        });
     }
 
     function initializeEventListeners() {
@@ -277,6 +366,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderFinalPhoto() {
 
+        const overlay = getCurrentFrameOverlay();
+
+        const context = photoCanvas.getContext("2d");
+
+            context.drawImage(
+                overlay,
+                0,
+                0,
+                photoCanvas.width,
+                photoCanvas.height
+        );
+
         capturedPhoto.src = photoCanvas.toDataURL("image/png");
 
     }
@@ -287,27 +388,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // =====================================================
     function updatePreviewLayout() {
 
-        const selectedFrame =
-            document.querySelector("[data-frame].selected").dataset.frame;
+        const mode = getCurrentCameraMode();
 
-        const preset = FRAME_PRESETS[selectedFrame];
-
-        cameraContainer.style.aspectRatio = preset.aspectRatio;
+        cameraContainer.style.aspectRatio = mode.aspectRatio;
 
     }
     
     function updateFrameOverlay() {
 
-    const selectedFrame =
-        document.querySelector("[data-frame].selected").dataset.frame;
+        const selectedFrame = APP_STATE.selectedFrame;
 
-    // Hide every overlay
-    Object.values(frameOverlays).forEach(frame => {
-        frame.classList.add("hidden");
-    });
+        // Hide every overlay
+            Object.values(frameOverlays).forEach(frame => {
+            frame.classList.add("hidden");
+            });
 
-    // Show the selected overlay
-    frameOverlays[selectedFrame].classList.remove("hidden");
+        // Show the selected overlay
+        frameOverlays[selectedFrame].classList.remove("hidden");
     }
 
     // =====================================================
