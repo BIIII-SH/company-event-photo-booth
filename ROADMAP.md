@@ -39,7 +39,7 @@ Develop a professional, browser-based photo booth application for company events
 # Phase 2 – Live Frame Overlay
 
 **Version:** v0.4.0
-**Status:** 🟡 In Development
+**Status:** ✅
 
 ### Overlay System
 
@@ -193,14 +193,16 @@ Develop a professional, browser-based photo booth application for company events
 
 | Version | Release                | Status            |
 | ------- | ---------------------- | ----------------- |
-| v0.1.0  | Welcome Screen         | ✅ Completed       |
-| v0.2.0  | Setup Screen           | ✅ Completed       |
-| v0.3.0  | Camera Navigation      | ✅ Completed       |
-| v0.3.1  | Camera Foundation      | ✅ Stable          |
-| v0.4.0  | Live Frame Overlay     | 🟡 In Development |
-| v0.5.0  | Photo Capture          | ⏳ Planned         |
+| v0.1.0  | Welcome Screen         | ✅ Completed      |
+| v0.2.0  | Setup Screen           | ✅ Completed      |
+| v0.3.0  | Camera Navigation      | ✅ Completed      |
+| v0.3.1  | Camera Foundation      | ✅ Completed      |
+| v0.4.0  | Live Frame Overlay     | ✅ Completed      |
+| v0.4.1  | Dynamic Frame System   | ✅ Completed      |
+| v0.4.2  | Feature/Architecture CU| ✅ Completed      |
+| v0.5.0  | Photo Capture          | 🟡 In Development |
 | v0.6.0  | Preview & Retake       | ⏳ Planned         |
 | v0.7.0  | Download & Share       | ⏳ Planned         |
 | v0.8.0  | Photo Booth Experience | ⏳ Planned         |
-| v0.9.0  | Event Customization    | ⏳ Planned         |
+| v0.9.0  | Event Customization    | ⏳ Planne          |
 | v1.0.0  | Production Release     | 🎯 Target         |

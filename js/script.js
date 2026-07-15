@@ -5,10 +5,26 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // =====================================================
-    // Configuration
+    // Application Configuration
     // =====================================================
     const APP_CONFIG = {
-        DEV_MODE: true
+
+        VERSION: "0.4.2",
+
+        DEV_MODE: true,
+
+        DEFAULT_FRAME: "square",
+
+        DEFAULT_CAMERA: "front",
+
+     DEFAULT_COUNTDOWN: 3,
+
+        TITLES: {
+            CAMERA: "Preparing Camera...",
+            PREVIEW: "Preview",
+            DEVELOPER: "Developer Preview"
+        }
+
     };
 
 
@@ -47,6 +63,44 @@ document.addEventListener("DOMContentLoaded", () => {
         portrait: portraitFrame,
         landscape: landscapeFrame
     };
+    
+
+    // =====================================================
+    // Application State
+    // =====================================================
+    const APP_STATE = {
+
+        currentStream: null,
+
+        selectedFrame: APP_CONFIG.DEFAULT_FRAME,
+
+        selectedCamera: APP_CONFIG.DEFAULT_CAMERA,
+
+        selectedCountdown: APP_CONFIG.DEFAULT_COUNTDOWN
+
+    };
+
+
+    // =====================================================
+    // Enumerations
+    // =====================================================
+    const FRAME_TYPES = {
+
+        SQUARE: "square",
+
+        PORTRAIT: "portrait",
+
+        LANDSCAPE: "landscape"
+
+    };
+
+    const CAMERA_TYPES = {
+
+        FRONT: "front",
+
+        REAR: "rear"
+
+    };
 
     const FRAME_PRESETS = {
         square: {
@@ -64,12 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
             aspectRatio: "16 / 9"
         }
     };
-    
-
-    // =====================================================
-    // Application State
-    // =====================================================
-    let currentStream = null;
 
 
     // =====================================================
@@ -153,7 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
         cameraTitle.textContent = "Preparing Camera...";
         const selectedCamera =
             document.querySelector('[data-camera].selected').dataset.camera;
-        currentStream = await navigator.mediaDevices.getUserMedia({
+            APP_STATE.currentStream =
+                await navigator.mediaDevices.getUserMedia({
+
             video: {
                 facingMode:
                     selectedCamera === "front"
@@ -163,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
             audio: false
         });
 
-        cameraPreview.srcObject = currentStream;
+        cameraPreview.srcObject = APP_STATE.currentStream;
         cameraTitle.textContent = "Position Yourself";
     }
 
@@ -182,9 +232,11 @@ document.addEventListener("DOMContentLoaded", () => {
             cameraTitle.textContent = "Camera Preview";
         }
 
-        if (currentStream) {
-            currentStream.getTracks().forEach(track => track.stop());
-            currentStream = null;
+        if (APP_STATE.currentStream) {
+            APP_STATE.currentStream
+                .getTracks()
+                .forEach (track => track.stop());
+            APP_STATE.currentStream = null;
             cameraPreview.srcObject = null;
         }
     }
