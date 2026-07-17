@@ -397,6 +397,14 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.width = cameraPreview.videoWidth;
         canvas.height = cameraPreview.videoHeight;
 
+        drawCameraFrame(context, canvas);
+
+        drawFrameOverlay(context, canvas);
+
+        exportCapturedPhoto(canvas);
+    }
+
+    function drawCameraFrame(context, canvas) {
         context.drawImage(
             cameraPreview,
             0,
@@ -404,8 +412,24 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.width,
             canvas.height
         );
+    }
 
-        renderFinalPhoto();
+    function drawFrameOverlay(context, canvas) {
+        const overlay = getCurrentFrameOverlay();
+
+        context.drawImage(
+            overlay,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+    }
+
+    function exportCapturedPhoto(canvas) {
+        capturedPhoto.src =
+            canvas.toDataURL("image/png");
+
     }
 
     function renderFinalPhoto() {
