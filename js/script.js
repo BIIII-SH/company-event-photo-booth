@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         VERSION: "0.4.2",
 
-        DEV_MODE: true,
+        DEV_MODE: false,
 
         DEFAULT_FRAME: "portrait",
 
