@@ -59,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const landscapeFrame = document.getElementById("landscapeFrame");
 
     const frameOverlays = {
-        square: squareFrame,
         portrait: portraitFrame,
         landscape: landscapeFrame
     };
@@ -87,6 +86,17 @@ document.addEventListener("DOMContentLoaded", () => {
             audio: false
         };
     }
+
+    // =====================================================
+    // Rendering Engine
+    // =====================================================
+    function calculateViewport(
+        videoWidth,
+        videoHeight,
+        frameMode
+    ) {
+    }
+
 
     function applyCameraMode() {
         const mode = getCurrentCameraMode();
@@ -150,25 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const CAMERA_MODES = {
-        square: {
-            aspectRatio: "1 / 1",
-
-            viewport: {
-                width: 1,
-                height: 1
-            },
-
-            capture: {
-                width: 1080,
-                height: 1080
-            },
-
-            camera: {
-                width: 1080,
-                height: 1080
-            }
-        },
-
+        
         portrait: {
             aspectRatio: "3 / 4",
 
@@ -253,6 +245,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 applyCameraMode();
             });
         });
+
+        // -------------------------------------
+        // Initialize from the default HTML selection
+        // -------------------------------------
+        const defaultFrame =
+            document.querySelector("[data-frame].selected");
+
+        if (defaultFrame) {
+            APP_STATE.selectedFrame = defaultFrame.dataset.frame;
+
+            updateFrameOverlay();
+            applyCameraMode();
+        }
     }
 
     function initializeCameraSelector() {

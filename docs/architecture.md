@@ -211,3 +211,11 @@ As the project evolves, additional modules may include:
 - Template Management
 
 The current architecture is intentionally designed to accommodate future expansion without major restructuring.
+
+---
+
+## Current Release Scope
+
+The August Event Release uses a single camera preview with selectable portrait and landscape frame overlays.
+
+Advanced rendering, dynamic camera ratios, and smart viewport calculations have been intentionally postponed until after the event to prioritize stability and delivery.

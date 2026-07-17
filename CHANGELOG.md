@@ -4,18 +4,15 @@ All notable changes to this project are documented here.
 
 ---
 
-## v0.5.0 (In Progress)
+## v0.5.0 - Event Ready Capture Pipeline
 
-### Architecture
-- Replaced generic option selector with dedicated frame, camera, and countdown controllers.
-- Introduced CAMERA_MODES as the foundation for camera behavior.
-- Added getCurrentCameraMode() helper.
-- Migrated frame selection to APP_STATE-driven architecture.
+### Changed
+- Refocused the project toward an event-ready release.
+- Simplified the capture pipeline to portrait and landscape overlays.
+- Deferred advanced camera framing, multiple aspect ratios, and rendering engine work to a future release.
 
-### Internal
-- Retired initializeOptionCards().
-- Simplified selector responsibilities using the Single Responsibility Principle.
-- Prepared the codebase for the upcoming Aspect Ratio Engine.
+### Goal
+Deliver a stable and intuitive mobile photo booth for the August company event.
 
 --
 
