@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         DEV_MODE: true,
 
-        DEFAULT_FRAME: "square",
+        DEFAULT_FRAME: "portrait",
 
         DEFAULT_CAMERA: "front",
 
@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const cameraContainer = document.querySelector(".camera-container");
 
     // Frames
-    const squareFrame = document.getElementById("squareFrame");
     const portraitFrame = document.getElementById("portraitFrame");
     const landscapeFrame = document.getElementById("landscapeFrame");
 
@@ -126,8 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // =====================================================
     const FRAME_TYPES = {
 
-        SQUARE: "square",
-
         PORTRAIT: "portrait",
 
         LANDSCAPE: "landscape"
@@ -143,10 +140,6 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const FRAME_PRESETS = {
-        square: {
-            overlay: squareFrame,
-            aspectRatio: "1 / 1"
-        },
 
         portrait: {
             overlay: portraitFrame,

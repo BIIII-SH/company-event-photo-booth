@@ -14,9 +14,9 @@ const EVENT = {
 
         logo: "assets/company-logo",
 
-        frameSquare: "assets/frame-square.png",
+        framePortrait: "assets/frame-portrait.png",
 
-        framePortrait: "assets/frame-portrait.png"
+        frameLandscape: "assets/frame-landscape.png"
 
     },
 
