@@ -4,6 +4,21 @@ All notable changes to this project are documented here.
 
 ---
 
+## v0.5.0 (In Progress)
+
+### Architecture
+- Replaced generic option selector with dedicated frame, camera, and countdown controllers.
+- Introduced CAMERA_MODES as the foundation for camera behavior.
+- Added getCurrentCameraMode() helper.
+- Migrated frame selection to APP_STATE-driven architecture.
+
+### Internal
+- Retired initializeOptionCards().
+- Simplified selector responsibilities using the Single Responsibility Principle.
+- Prepared the codebase for the upcoming Aspect Ratio Engine.
+
+--
+
 ## v0.4.2 - Architecture Cleanup
 
 ### Added

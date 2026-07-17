@@ -71,6 +71,12 @@ document.addEventListener("DOMContentLoaded", () => {
     function getCurrentCameraMode() {
         return CAMERA_MODES[APP_STATE.selectedFrame];
     }
+
+    function applyCameraMode() {
+        const mode = getCurrentCameraMode();
+
+        updateCameraViewport(mode);
+    }
     
 
     // =====================================================
@@ -129,39 +135,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const CAMERA_MODES = {
         square: {
-            aspectRatio: 1,
+            aspectRatio: "1 / 1",
+            viewport: {
+                width: 1,
+                height: 1
+            },
 
-            canvasWidth: 1080,
-
-            canvasHeight: 1080,
-
-            frameId: "square"
+            capture: {
+                width: 1080,
+                height: 1080
+            }
         },
 
         portrait: {
+            aspectRatio: "3 / 4",
+            viewport: {
+                width: 3,
+                height: 4
+            },
 
-            aspectRatio: 1240 / 1748,
-
-            canvasWidth: 1240,
-
-            canvasHeight: 1748,
-
-            frameId: "portrait"
-
+            capture: {
+                width: 1080,
+                height: 1440
+            }
         },
 
         landscape: {
+            aspectRatio: "4 / 3",
+            viewport: {
+                width: 4,
+                height: 3
+            },
 
-            aspectRatio: 16 / 9,
-
-            canvasWidth: 1920,
-
-            canvasHeight: 1080,
-
-            frameId: "landscape"
-
+            capture: {
+                width: 1440,
+                height: 1080
+            }
         }
-    
     };
 
 
@@ -206,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Refresh UI
                 updateFrameOverlay();
-                updatePreviewLayout();
+                applyCameraMode();
             });
         });
     }
@@ -292,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function startCamera() {
 
         updateFrameOverlay();
-        updatePreviewLayout();
+        applyCameraMode();
 
         if (APP_CONFIG.DEV_MODE) {
             cameraPreview.classList.add("hidden");
@@ -386,12 +396,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // =====================================================
     // Overlay Functions
     // =====================================================
-    function updatePreviewLayout() {
-
-        const mode = getCurrentCameraMode();
-
-        cameraContainer.style.aspectRatio = mode.aspectRatio;
-
+    function updateCameraViewport(mode) {
+        cameraContainer.style.aspectRatio =
+            mode.aspectRatio;
     }
     
     function updateFrameOverlay() {
