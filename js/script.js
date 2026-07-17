@@ -72,6 +72,22 @@ document.addEventListener("DOMContentLoaded", () => {
         return CAMERA_MODES[APP_STATE.selectedFrame];
     }
 
+    function buildCameraConstraints(mode) {
+        return {
+            video: {
+                facingMode: "user",
+                width: {
+                    ideal: mode.camera.width
+                },
+                height: {
+                    ideal: mode.camera.height
+                }
+            },
+
+            audio: false
+        };
+    }
+
     function applyCameraMode() {
         const mode = getCurrentCameraMode();
 
@@ -136,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const CAMERA_MODES = {
         square: {
             aspectRatio: "1 / 1",
+
             viewport: {
                 width: 1,
                 height: 1
@@ -144,11 +161,17 @@ document.addEventListener("DOMContentLoaded", () => {
             capture: {
                 width: 1080,
                 height: 1080
+            },
+
+            camera: {
+                width: 1080,
+                height: 1080
             }
         },
 
         portrait: {
             aspectRatio: "3 / 4",
+
             viewport: {
                 width: 3,
                 height: 4
@@ -157,17 +180,28 @@ document.addEventListener("DOMContentLoaded", () => {
             capture: {
                 width: 1080,
                 height: 1440
+            },
+
+            camera: {
+                width: 1080,
+                height: 1440
             }
         },
 
         landscape: {
             aspectRatio: "4 / 3",
+
             viewport: {
                 width: 4,
                 height: 3
             },
 
             capture: {
+                width: 1440,
+                height: 1080
+            },
+
+            camera: {
                 width: 1440,
                 height: 1080
             }
@@ -315,17 +349,19 @@ document.addEventListener("DOMContentLoaded", () => {
         cameraTitle.textContent = "Preparing Camera...";
         const selectedCamera =
             document.querySelector('[data-camera].selected').dataset.camera;
-            APP_STATE.currentStream =
-                await navigator.mediaDevices.getUserMedia({
+            const mode = getCurrentCameraMode();
 
-            video: {
-                facingMode:
-                    selectedCamera === "front"
-                        ? "user"
-                        : "environment"
-            },
-            audio: false
-        });
+            const constraints = buildCameraConstraints(mode);
+
+            console.log("Camera Constraints:", constraints);
+
+            constraints.video.facingMode =
+                selectedCamera === "front"
+                    ? "user"
+                    : "environment";
+
+            APP_STATE.currentStream =
+                await navigator.mediaDevices.getUserMedia(constraints);
 
         cameraPreview.srcObject = APP_STATE.currentStream;
         cameraTitle.textContent = "Position Yourself";
