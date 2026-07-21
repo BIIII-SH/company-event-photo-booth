@@ -437,6 +437,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function drawCameraFrame(context, canvas) {
 
+        alert("NEW drawCameraFrame()");
+
         const video = cameraPreview;
 
         const container = document.querySelector(".camera-container");
