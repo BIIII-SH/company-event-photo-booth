@@ -437,54 +437,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function drawCameraFrame(context, canvas) {
 
-        alert("NEW drawCameraFrame()");
+        try {
 
-        const video = cameraPreview;
+            const video = cameraPreview;
 
-        const container = document.querySelector(".camera-container");
+            const container = document.querySelector(".camera-container");
 
-        const videoWidth = video.videoWidth;
-        const videoHeight = video.videoHeight;
+            const videoWidth = video.videoWidth;
+            const videoHeight = video.videoHeight;
 
-        alert(
-            `Video: ${videoWidth} × ${videoHeight}
-        Container: ${containerWidth} × ${containerHeight}`
-        );
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
 
-        const containerWidth = container.clientWidth;
-        const containerHeight = container.clientHeight;
+            const videoRatio = videoWidth / videoHeight;
+            const containerRatio = containerWidth / containerHeight;
 
-        const videoRatio = videoWidth / videoHeight;
-        const containerRatio = containerWidth / containerHeight;
+            let sx = 0;
+            let sy = 0;
+            let sWidth = videoWidth;
+            let sHeight = videoHeight;
 
-        let sx = 0;
-        let sy = 0;
-        let sWidth = videoWidth;
-        let sHeight = videoHeight;
+            if (videoRatio > containerRatio) {
 
-        if (videoRatio > containerRatio) {
+                sWidth = videoHeight * containerRatio;
+                sx = (videoWidth - sWidth) / 2;
 
-            sWidth = videoHeight * containerRatio;
-            sx = (videoWidth - sWidth) / 2;
+            } else {
 
-        } else {
+                sHeight = videoWidth / containerRatio;
+                sy = (videoHeight - sHeight) / 2;
 
-            sHeight = videoWidth / containerRatio;
-            sy = (videoHeight - sHeight) / 2;
+            }
+
+            context.drawImage(
+                video,
+                sx,
+                sy,
+                sWidth,
+                sHeight,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+        } catch (error) {
+
+            alert(error);
 
         }
-
-        context.drawImage(
-            video,
-            sx,
-            sy,
-            sWidth,
-            sHeight,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
 
     }
 
