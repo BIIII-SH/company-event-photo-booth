@@ -410,8 +410,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const context = canvas.getContext("2d");
 
-        canvas.width = cameraPreview.videoWidth;
-        canvas.height = cameraPreview.videoHeight;
+        const frame =
+            APP_STATE.selectedFrame;
+
+        if (frame === "portrait") {
+
+            canvas.width = 1080;
+            canvas.height = 1440;
+
+        } else {
+
+            canvas.width = 1440;
+            canvas.height = 1080;
+
+        }
 
         drawCameraFrame(context, canvas);
 
@@ -421,16 +433,53 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function drawCameraFrame(context, canvas) {
+
+        const video = cameraPreview;
+
+        const container = document.querySelector(".camera-container");
+
+        const videoWidth = video.videoWidth;
+        const videoHeight = video.videoHeight;
+
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        const videoRatio = videoWidth / videoHeight;
+        const containerRatio = containerWidth / containerHeight;
+
+        let sx = 0;
+        let sy = 0;
+        let sWidth = videoWidth;
+        let sHeight = videoHeight;
+
+        if (videoRatio > containerRatio) {
+
+            sWidth = videoHeight * containerRatio;
+            sx = (videoWidth - sWidth) / 2;
+
+        } else {
+
+            sHeight = videoWidth / containerRatio;
+            sy = (videoHeight - sHeight) / 2;
+
+        }
+
         context.drawImage(
-            cameraPreview,
+            video,
+            sx,
+            sy,
+            sWidth,
+            sHeight,
             0,
             0,
             canvas.width,
             canvas.height
         );
+
     }
 
     function drawFrameOverlay(context, canvas) {
+
         const overlay = getCurrentFrameOverlay();
 
         context.drawImage(
@@ -440,11 +489,12 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.width,
             canvas.height
         );
+
     }
 
     function exportCapturedPhoto(canvas) {
-        capturedPhoto.src =
-            canvas.toDataURL("image/png");
+
+        capturedPhoto.src = canvas.toDataURL("image/png");
 
     }
 
