@@ -10,7 +10,7 @@ body{
 
     background:#eef6ff;
 
-    min-height:100vh;
+    min-height:100dvh;
 
     display:flex;
 
@@ -254,12 +254,16 @@ h3{
 /* ===========================
    CAMERA SCREEN
 =========================== */
+#cameraScreen{
+
+}
+
 
 .camera-header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:20px;
+    margin-bottom:12px;
 }
 
 .camera-header h2{
@@ -277,21 +281,22 @@ h3{
 
 .camera-container{
 
-    position: relative;
+    position:relative;
 
-    width: 100%;
+    width:100%;
 
-    aspect-ratio: 1 / 1;
+    aspect-ratio:1 / 1;
 
-    overflow: hidden;
+    overflow:hidden;
 
-    border-radius: 12px;
+    border-radius:12px;
 
 }
 
 .camera-footer{
 
     display:flex;
+
     justify-content:center;
 
     margin-top:25px;

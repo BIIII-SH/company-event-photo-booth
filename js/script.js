@@ -339,6 +339,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (APP_CONFIG.DEV_MODE) {
             cameraPreview.classList.add("hidden");
             devPreview.classList.remove("hidden");
+
+            const selectedCamera =
+                document.querySelector('[data-camera].selected').dataset.camera;
+
+            devPreview.style.transform =
+                selectedCamera === "front"
+                    ? "scaleX(-1)"
+                    : "scaleX(1)";
+
             cameraTitle.textContent = "Developer Preview";
             return;
         }
@@ -358,10 +367,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     ? "user"
                     : "environment";
 
-            APP_STATE.currentStream =
-                await navigator.mediaDevices.getUserMedia(constraints);
+        APP_STATE.currentStream =
+            await navigator.mediaDevices.getUserMedia(constraints);
 
         cameraPreview.srcObject = APP_STATE.currentStream;
+
+        if (selectedCamera === "front") {
+            cameraPreview.style.transform = "scaleX(-1)";
+        } else {
+            cameraPreview.style.transform = "scaleX(1)";
+        }
+
         cameraTitle.textContent = "Position Yourself";
     }
 

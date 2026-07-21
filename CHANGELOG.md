@@ -14,6 +14,10 @@ All notable changes to this project are documented here.
 ### Goal
 Deliver a stable and intuitive mobile photo booth for the August company event.
 
+### Fixed
+- Resolved an initialization issue where the default frame was not applied until manually selected.
+- Application state now synchronizes with the default frame selected in the HTML on startup.
+
 --
 
 ## v0.4.2 - Architecture Cleanup
