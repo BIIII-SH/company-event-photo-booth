@@ -406,6 +406,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function captureCurrentFrame() {
+
+        alert("captureCurrentFrame()");
+
         const canvas = photoCanvas;
 
         const context = canvas.getContext("2d");
@@ -440,6 +443,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const videoWidth = video.videoWidth;
         const videoHeight = video.videoHeight;
+
+        alert(
+            `Video: ${videoWidth} × ${videoHeight}
+        Container: ${containerWidth} × ${containerHeight}`
+        );
 
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
