@@ -394,6 +394,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             await cameraPreview.play();
 
+            startLiveCanvasPreview();
+
             const track = APP_STATE.currentStream.getVideoTracks()[0];
             const settings = track.getSettings();
 
@@ -453,6 +455,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function stopCamera() {
+    if (liveCanvasAnimation) {
+
+        cancelAnimationFrame(liveCanvasAnimation);
+
+        liveCanvasAnimation = null;
+
+    }
+
         if (APP_CONFIG.DEV_MODE) {
             devPreview.classList.add("hidden");
             cameraPreview.classList.remove("hidden");
@@ -657,6 +667,40 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         capturedPhoto.src = photoCanvas.toDataURL("image/png");
+
+    }
+
+    let liveCanvasAnimation = null;
+
+        function startLiveCanvasPreview() {
+
+            const context = photoCanvas.getContext("2d");
+
+            function render() {
+
+                if (
+                    cameraPreview.readyState >= 2
+                ) {
+
+                    photoCanvas.width = cameraPreview.videoWidth;
+                    photoCanvas.height = cameraPreview.videoHeight;
+
+                    context.drawImage(
+                        cameraPreview,
+                        0,
+                        0,
+                        photoCanvas.width,
+                        photoCanvas.height
+                    );
+
+                }
+
+                liveCanvasAnimation =
+                    requestAnimationFrame(render);
+
+        }
+
+        render();
 
     }
 
