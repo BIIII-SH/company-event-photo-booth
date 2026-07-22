@@ -18,6 +18,28 @@ Deliver a stable and intuitive mobile photo booth for the August company event.
 - Resolved an initialization issue where the default frame was not applied until manually selected.
 - Application state now synchronizes with the default frame selected in the HTML on startup.
 
+
+### Milestone 5.3 – Capture Calibration
+
+✔ Refactored capture pipeline into:
+  • drawCameraFrame()
+  • drawFrameOverlay()
+  • exportCapturedPhoto()
+
+✔ Removed duplicate function definitions
+
+✔ Front camera preview is mirrored
+
+✔ Confirmed capture mismatch still exists:
+  • Capture uses incorrect source region
+  • Image appears from top-left of sensor
+  • Capture is not yet mirrored
+
+Next:
+→ Inspect video geometry on mobile
+→ Calibrate drawCameraFrame()
+→ Add mirrored capture
+
 --
 
 ## v0.4.2 - Architecture Cleanup

@@ -337,6 +337,7 @@ document.addEventListener("DOMContentLoaded", () => {
         applyCameraMode();
 
         if (APP_CONFIG.DEV_MODE) {
+
             cameraPreview.classList.add("hidden");
             devPreview.classList.remove("hidden");
 
@@ -352,41 +353,67 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-    try {
-        cameraTitle.textContent = "Preparing Camera...";
-        const selectedCamera =
-            document.querySelector('[data-camera].selected').dataset.camera;
+        try {
+
+            cameraTitle.textContent = "Preparing Camera...";
+
+            const selectedCamera =
+                document.querySelector('[data-camera].selected').dataset.camera;
+
             const mode = getCurrentCameraMode();
 
             const constraints = buildCameraConstraints(mode);
-
-            console.log("Camera Constraints:", constraints);
 
             constraints.video.facingMode =
                 selectedCamera === "front"
                     ? "user"
                     : "environment";
 
-        APP_STATE.currentStream =
-            await navigator.mediaDevices.getUserMedia(constraints);
+            APP_STATE.currentStream =
+                await navigator.mediaDevices.getUserMedia(constraints);
 
-        cameraPreview.srcObject = APP_STATE.currentStream;
+            cameraPreview.srcObject = APP_STATE.currentStream;
 
-        if (selectedCamera === "front") {
-            cameraPreview.style.transform = "scaleX(-1)";
-        } else {
-            cameraPreview.style.transform = "scaleX(1)";
+            await new Promise(resolve => {
+                cameraPreview.onloadedmetadata = resolve;
+            });
+
+            await cameraPreview.play();
+
+            const track = APP_STATE.currentStream.getVideoTracks()[0];
+            const settings = track.getSettings();
+
+            alert(
+                `Camera Stream
+
+                    Width: ${settings.width}
+                    Height: ${settings.height}
+                    Aspect Ratio: ${settings.aspectRatio}
+                    Facing Mode: ${settings.facingMode}
+
+                Video Element
+
+                    videoWidth: ${cameraPreview.videoWidth}
+                    videoHeight: ${cameraPreview.videoHeight}`
+            );
+
+            cameraPreview.style.transform =
+                selectedCamera === "front"
+                    ? "scaleX(-1)"
+                    : "scaleX(1)";
+
+            cameraTitle.textContent = "Position Yourself";
+
+        } catch (error) {
+
+            alert(
+                "Camera access is required to use the Photo Booth.\n\nPlease allow camera permission and try again."
+            );
+
+            showScreen(setupScreen);
+
         }
 
-        cameraTitle.textContent = "Position Yourself";
-    }
-
-    catch (error) {
-        alert(
-            "Camera access is required to use the Photo Booth.\n\nPlease allow camera permission and try again."
-        );
-        showScreen(setupScreen);
-    }
     }
 
     function stopCamera() {
@@ -406,8 +433,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function captureCurrentFrame() {
-
-        alert("captureCurrentFrame()");
 
         const canvas = photoCanvas;
 
@@ -437,55 +462,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function drawCameraFrame(context, canvas) {
 
-        try {
+        const video = cameraPreview;
 
-            const video = cameraPreview;
+        const container = document.querySelector(".camera-container");
 
-            const container = document.querySelector(".camera-container");
+        const videoWidth = video.videoWidth;
+        const videoHeight = video.videoHeight;
 
-            const videoWidth = video.videoWidth;
-            const videoHeight = video.videoHeight;
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
 
-            const containerWidth = container.clientWidth;
-            const containerHeight = container.clientHeight;
+        const videoRatio = videoWidth / videoHeight;
+        const containerRatio = containerWidth / containerHeight;
 
-            const videoRatio = videoWidth / videoHeight;
-            const containerRatio = containerWidth / containerHeight;
+        let sx = 0;
+        let sy = 0;
+        let sWidth = videoWidth;
+        let sHeight = videoHeight;
 
-            let sx = 0;
-            let sy = 0;
-            let sWidth = videoWidth;
-            let sHeight = videoHeight;
+        if (videoRatio > containerRatio) {
 
-            if (videoRatio > containerRatio) {
+            sWidth = videoHeight * containerRatio;
+            sx = (videoWidth - sWidth) / 2;
 
-                sWidth = videoHeight * containerRatio;
-                sx = (videoWidth - sWidth) / 2;
+        } else {
 
-            } else {
-
-                sHeight = videoWidth / containerRatio;
-                sy = (videoHeight - sHeight) / 2;
-
-            }
-
-            context.drawImage(
-                video,
-                sx,
-                sy,
-                sWidth,
-                sHeight,
-                0,
-                0,
-                canvas.width,
-                canvas.height
-            );
-
-        } catch (error) {
-
-            alert(error);
+            sHeight = videoWidth / containerRatio;
+            sy = (videoHeight - sHeight) / 2;
 
         }
+
+        context.drawImage(
+            video,
+            sx,
+            sy,
+            sWidth,
+            sHeight,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
 
     }
 
