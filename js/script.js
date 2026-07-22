@@ -523,6 +523,56 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
+    function getDisplayedVideoRect() {
+
+        const video = cameraPreview;
+
+        const container = document.querySelector(".camera-container");
+
+        const videoRatio =
+            video.videoWidth / video.videoHeight;
+
+        const containerRatio =
+            container.clientWidth / container.clientHeight;
+
+        let drawWidth;
+        let drawHeight;
+        let offsetX;
+        let offsetY;
+
+        if (videoRatio > containerRatio) {
+
+            drawHeight = container.clientHeight;
+            drawWidth = drawHeight * videoRatio;
+
+            offsetX =
+                (drawWidth - container.clientWidth) / 2;
+
+            offsetY = 0;
+
+        } else {
+
+            drawWidth = container.clientWidth;
+            drawHeight = drawWidth / videoRatio;
+
+            offsetX = 0;
+
+            offsetY =
+                (drawHeight - container.clientHeight) / 2;
+
+        }
+
+        return {
+
+            drawWidth,
+            drawHeight,
+            offsetX,
+            offsetY
+
+        };
+
+    }
+
     function drawFrameOverlay(context, canvas) {
 
         const overlay = getCurrentFrameOverlay();
