@@ -115,7 +115,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         selectedCamera: APP_CONFIG.DEFAULT_CAMERA,
 
-        selectedCountdown: APP_CONFIG.DEFAULT_COUNTDOWN
+        selectedCountdown: APP_CONFIG.DEFAULT_COUNTDOWN,
+
+        cameraInfo: {
+
+            width: 0,
+
+            height: 0,
+
+            aspectRatio: 0,
+
+            mirrored: false,
+
+            orientation: ""
+
+        },
 
     };
 
@@ -383,19 +397,22 @@ document.addEventListener("DOMContentLoaded", () => {
             const track = APP_STATE.currentStream.getVideoTracks()[0];
             const settings = track.getSettings();
 
-            alert(
-                `Camera Stream
+            APP_STATE.cameraInfo.width =
+                settings.width;
 
-                    Width: ${settings.width}
-                    Height: ${settings.height}
-                    Aspect Ratio: ${settings.aspectRatio}
-                    Facing Mode: ${settings.facingMode}
+            APP_STATE.cameraInfo.height =
+                settings.height;
 
-                Video Element
+            APP_STATE.cameraInfo.aspectRatio =
+                settings.aspectRatio;
 
-                    videoWidth: ${cameraPreview.videoWidth}
-                    videoHeight: ${cameraPreview.videoHeight}`
-            );
+            APP_STATE.cameraInfo.mirrored =
+                selectedCamera === "front";
+
+            APP_STATE.cameraInfo.orientation =
+                settings.width > settings.height
+                    ? "landscape"
+                    : "portrait";
 
             cameraPreview.style.transform =
                 selectedCamera === "front"
