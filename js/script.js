@@ -479,67 +479,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function drawCameraFrame(context, canvas) {
 
-        const video = cameraPreview;
+    const video = cameraPreview;
+    const container = document.querySelector(".camera-container");
 
-        const container = document.querySelector(".camera-container");
+    const videoWidth = video.videoWidth;
+    const videoHeight = video.videoHeight;
 
-        const videoWidth = video.videoWidth;
-        const videoHeight = video.videoHeight;
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
 
-        const containerWidth = container.clientWidth;
-        const containerHeight = container.clientHeight;
+    const videoRatio = videoWidth / videoHeight;
+    const containerRatio = containerWidth / containerHeight;
 
-        const videoRatio = videoWidth / videoHeight;
-        const containerRatio = containerWidth / containerHeight;
+    let sx = 0;
+    let sy = 0;
+    let sWidth = videoWidth;
+    let sHeight = videoHeight;
 
-        let sx = 0;
-        let sy = 0;
-        let sWidth = videoWidth;
-        let sHeight = videoHeight;
+    if (videoRatio > containerRatio) {
 
-        if (videoRatio > containerRatio) {
+        sWidth = videoHeight * containerRatio;
+        sx = (videoWidth - sWidth) / 2;
 
-            sWidth = videoHeight * containerRatio;
-            sx = (videoWidth - sWidth) / 2;
+    } else {
 
-        } else {
-
-            sHeight = videoWidth / containerRatio;
-            sy = (videoHeight - sHeight) / 2;
-
-        }
-
-        const calibration =
-            CAMERA_CALIBRATION[APP_STATE.selectedFrame];
-
-        const scale =
-            calibration.scale;
-
-        const scaledWidth =
-            sWidth / scale;
-
-        const scaledHeight =
-            sHeight / scale;
-
-        const scaledSX =
-            sx + (sWidth - scaledWidth) / 2;
-
-        const scaledSY =
-            sy + (sHeight - scaledHeight) / 2;
-
-        context.drawImage(
-            video,
-            scaledSX,
-            scaledSY,
-            scaledWidth,
-            scaledHeight,
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
+        sHeight = videoWidth / containerRatio;
+        sy = (videoHeight - sHeight) / 2;
 
     }
+
+    const calibration =
+        CAMERA_CALIBRATION[APP_STATE.selectedFrame] || {
+            scale: 1,
+            offsetX: 0,
+            offsetY: 0
+        };
+
+    const scale = calibration.scale || 1;
+    const offsetX = calibration.offsetX || 0;
+    const offsetY = calibration.offsetY || 0;
+
+    const scaledWidth = sWidth / scale;
+    const scaledHeight = sHeight / scale;
+
+    const scaledSX =
+        sx + (sWidth - scaledWidth) / 2 + offsetX;
+
+    const scaledSY =
+        sy + (sHeight - scaledHeight) / 2 + offsetY;
+
+    context.drawImage(
+        video,
+        scaledSX,
+        scaledSY,
+        scaledWidth,
+        scaledHeight,
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+}
 
     function getDisplayedVideoRect() {
 
