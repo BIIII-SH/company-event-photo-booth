@@ -528,6 +528,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const scaledSY =
         sy + (sHeight - scaledHeight) / 2 + offsetY;
 
+    console.log({
+        sx,
+        sy,
+        sWidth,
+        sHeight,
+        videoWidth,
+        videoHeight,
+        canvasWidth: canvas.width,
+        canvasHeight: canvas.height
+    });
+
     context.drawImage(
         video,
         scaledSX,

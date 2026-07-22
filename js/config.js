@@ -39,7 +39,7 @@ const CAMERA_CALIBRATION = {
 
     portrait: {
 
-        scale: 1.00,
+        scale: 0.97,
 
         offsetX: 0,
 
