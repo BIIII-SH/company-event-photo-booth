@@ -14,9 +14,9 @@ const EVENT = {
 
         logo: "assets/company-logo",
 
-        frameSquare: "assets/frame-square.png",
+        framePortrait: "assets/frame-portrait.png",
 
-        framePortrait: "assets/frame-portrait.png"
+        frameLandscape: "assets/frame-landscape.png"
 
     },
 
@@ -30,6 +30,42 @@ const EVENT = {
 
         thankYou:
             "Thank you for celebrating the everyday heroes who inspire us. Happy National Heroes Day!"
+
+    }
+
+};
+
+const CAMERA_CALIBRATION = {
+
+    portrait: {
+
+        scale: 0.97,
+
+        offsetX: 0,
+
+        offsetY: 0
+
+    },
+
+    landscape: {
+
+        scale: 1.00,
+
+        offsetX: 0,
+
+        offsetY: 0
+
+    },
+
+    front: {
+
+        mirrorCapture: true
+
+    },
+
+    rear: {
+
+        mirrorCapture: false
 
     }
 

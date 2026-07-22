@@ -76,31 +76,15 @@ Customize your photo experience before capturing your hero moment.
 
 
 <div class="options">
+    <div class="option-card selected" data-frame="portrait">
+        📱
+        <span>Portrait</span>
+    </div>
 
-
-<div class="option-card selected" data-frame="square">
-
-⬜
-
-<span>Square</span>
-
-</div>
-
-
-<div class="option-card" data-frame="portrait">
-
-▯
-
-<span>Portrait</span>
-
-</div>
-
-
-<div class="option-card" data-frame="landscape">
-    ▭
-    <span>Landscape</span>
-</div>
-
+    <div class="option-card" data-frame="landscape">
+        🔄
+        <span>Landscape</span>
+    </div>
 
 </div>
 
@@ -171,7 +155,6 @@ Continue →
 
 </button>
 
-
 </div>
 <!-- ===================================================== -->
 <!-- Camera Screen -->
@@ -206,12 +189,6 @@ Continue →
 
         <!-- Frame Overlays -->
         <img
-            id="squareFrame"
-            class="frame-overlay"
-            src="assets/frame-square.png"
-            alt="Square Frame">
-
-        <img
             id="portraitFrame"
             class="frame-overlay hidden"
             src="assets/frame-portrait.png"
@@ -229,16 +206,16 @@ Continue →
     <div class="camera-footer">
 
         <button
+            id="backBtn"
+            type="button">
+            ← Back
+        </button>
+
+        <button
             id="captureBtn"
             class="primary-btn"
             type="button">
             📸
-        </button>
-
-        <button
-            id="backBtn"
-            type="button">
-            ← Back
         </button>
 
     </div>
@@ -295,8 +272,8 @@ Continue →
 </div>
 
 
+<script src="js/config.js"></script>
 <script src="js/script.js"></script>
-
 
 </body>
 
