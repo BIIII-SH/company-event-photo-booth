@@ -419,6 +419,25 @@ document.addEventListener("DOMContentLoaded", () => {
                     ? "scaleX(-1)"
                     : "scaleX(1)";
 
+            console.log("Video Element");
+
+            console.log({
+                clientWidth: cameraPreview.clientWidth,
+                clientHeight: cameraPreview.clientHeight,
+
+                offsetWidth: cameraPreview.offsetWidth,
+                offsetHeight: cameraPreview.offsetHeight,
+
+                videoWidth: cameraPreview.videoWidth,
+                videoHeight: cameraPreview.videoHeight,
+
+                computedObjectFit:
+                    window.getComputedStyle(cameraPreview).objectFit,
+
+                computedTransform:
+                    window.getComputedStyle(cameraPreview).transform
+            });
+
             cameraTitle.textContent = "Position Yourself";
 
         } catch (error) {
