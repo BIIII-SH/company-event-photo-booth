@@ -509,12 +509,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         }
 
+        const calibration =
+            CAMERA_CALIBRATION[APP_STATE.selectedFrame];
+
+        const scale =
+            calibration.scale;
+
+        const scaledWidth =
+            sWidth / scale;
+
+        const scaledHeight =
+            sHeight / scale;
+
+        const scaledSX =
+            sx + (sWidth - scaledWidth) / 2;
+
+        const scaledSY =
+            sy + (sHeight - scaledHeight) / 2;
+
         context.drawImage(
             video,
-            sx,
-            sy,
-            sWidth,
-            sHeight,
+            scaledSX,
+            scaledSY,
+            scaledWidth,
+            scaledHeight,
             0,
             0,
             canvas.width,

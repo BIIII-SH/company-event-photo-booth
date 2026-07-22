@@ -34,3 +34,39 @@ const EVENT = {
     }
 
 };
+
+const CAMERA_CALIBRATION = {
+
+    portrait: {
+
+        scale: 1.00,
+
+        offsetX: 0,
+
+        offsetY: 0
+
+    },
+
+    landscape: {
+
+        scale: 1.00,
+
+        offsetX: 0,
+
+        offsetY: 0
+
+    },
+
+    front: {
+
+        mirrorCapture: true
+
+    },
+
+    rear: {
+
+        mirrorCapture: false
+
+    }
+
+};
