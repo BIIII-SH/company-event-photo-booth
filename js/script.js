@@ -71,19 +71,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function buildCameraConstraints(mode) {
+
         return {
+
             video: {
-                facingMode: "user",
-                width: {
-                    ideal: mode.camera.width
-                },
-                height: {
-                    ideal: mode.camera.height
-                }
+
+                facingMode: "user"
+
             },
 
             audio: false
+
         };
+
     }
 
     // =====================================================
@@ -405,12 +405,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const rect = cameraPreview.getBoundingClientRect();
 
-            console.log("Video Diagnostics", {
+            console.table({
                 videoWidth: cameraPreview.videoWidth,
                 videoHeight: cameraPreview.videoHeight,
 
                 clientWidth: cameraPreview.clientWidth,
                 clientHeight: cameraPreview.clientHeight,
+
+                canvasWidth: photoCanvas.width,
+                canvasHeight: photoCanvas.height,
 
                 rectWidth: rect.width,
                 rectHeight: rect.height,
@@ -719,6 +722,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     photoCanvas.width,
                     photoCanvas.height
                 );
+
+                console.count("Canvas Render");
 
                 liveCanvasAnimation =
                     requestAnimationFrame(render);
