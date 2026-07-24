@@ -394,6 +394,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
             await cameraPreview.play();
 
+            const rect = cameraPreview.getBoundingClientRect();
+
+            console.log("Video Diagnostics", {
+                videoWidth: cameraPreview.videoWidth,
+                videoHeight: cameraPreview.videoHeight,
+
+                clientWidth: cameraPreview.clientWidth,
+                clientHeight: cameraPreview.clientHeight,
+
+                rectWidth: rect.width,
+                rectHeight: rect.height,
+
+                objectFit: getComputedStyle(cameraPreview).objectFit,
+                transform: getComputedStyle(cameraPreview).transform
+            });
+
             startLiveCanvasPreview();
 
             const track = APP_STATE.currentStream.getVideoTracks()[0];
