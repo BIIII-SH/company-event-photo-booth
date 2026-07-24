@@ -674,35 +674,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function startLiveCanvasPreview() {
 
-            const context = photoCanvas.getContext("2d");
+            photoCanvas.classList.remove("hidden");
+            cameraPreview.classList.add("hidden");
+
+            const ctx = photoCanvas.getContext("2d");
 
             function render() {
 
-                if (
-                    cameraPreview.readyState >= 2
-                ) {
+                if (!APP_STATE.currentStream) return;
 
-                    photoCanvas.width = cameraPreview.videoWidth;
-                    photoCanvas.height = cameraPreview.videoHeight;
+                photoCanvas.width =
+                    cameraPreview.videoWidth;
 
-                    context.drawImage(
-                        cameraPreview,
-                        0,
-                        0,
-                        photoCanvas.width,
-                        photoCanvas.height
-                    );
+                photoCanvas.height =
+                    cameraPreview.videoHeight;
 
-                }
+                ctx.drawImage(
+                    cameraPreview,
+                    0,
+                    0,
+                    photoCanvas.width,
+                    photoCanvas.height
+                );
 
                 liveCanvasAnimation =
                     requestAnimationFrame(render);
 
+            }
+
+            render();
+
         }
-
-        render();
-
-    }
 
 
     // =====================================================
