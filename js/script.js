@@ -724,13 +724,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
-                ctx.drawImage(
-                    cameraPreview,
-                    0,
-                    0,
-                    photoCanvas.width,
-                    photoCanvas.height
-                );
+                drawCameraFrame(ctx, photoCanvas);
 
                 ctx.restore();
 
