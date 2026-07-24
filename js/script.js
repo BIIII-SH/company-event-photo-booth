@@ -715,6 +715,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 photoCanvas.height =
                     cameraPreview.videoHeight;
 
+                ctx.save();
+
+                if (APP_STATE.cameraInfo.mirrored) {
+
+                    ctx.translate(photoCanvas.width, 0);
+                    ctx.scale(-1, 1);
+
+                }
+
                 ctx.drawImage(
                     cameraPreview,
                     0,
@@ -722,6 +731,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     photoCanvas.width,
                     photoCanvas.height
                 );
+
+                ctx.restore();
 
                 console.count("Canvas Render");
 
