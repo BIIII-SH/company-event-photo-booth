@@ -346,6 +346,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Camera Functions
     // =====================================================
     async function startCamera() {
+        alert("START CAMERA");
+
+        console.log("START CAMERA");
 
         updateFrameOverlay();
         applyCameraMode();
