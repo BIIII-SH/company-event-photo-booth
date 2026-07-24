@@ -346,6 +346,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Camera Functions
     // =====================================================
     async function startCamera() {
+        alert("START CAMERA");
+
+        console.log("START CAMERA");
 
         updateFrameOverlay();
         applyCameraMode();
@@ -393,6 +396,28 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             await cameraPreview.play();
+
+            alert("VIDEO PLAYED");
+
+            console.log("VIDEO PLAYED");
+
+            startLiveCanvasPreview();
+
+            const rect = cameraPreview.getBoundingClientRect();
+
+            console.log("Video Diagnostics", {
+                videoWidth: cameraPreview.videoWidth,
+                videoHeight: cameraPreview.videoHeight,
+
+                clientWidth: cameraPreview.clientWidth,
+                clientHeight: cameraPreview.clientHeight,
+
+                rectWidth: rect.width,
+                rectHeight: rect.height,
+
+                objectFit: getComputedStyle(cameraPreview).objectFit,
+                transform: getComputedStyle(cameraPreview).transform
+            });
 
             const track = APP_STATE.currentStream.getVideoTracks()[0];
             const settings = track.getSettings();
@@ -453,6 +478,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function stopCamera() {
+    if (liveCanvasAnimation) {
+
+        cancelAnimationFrame(liveCanvasAnimation);
+
+        liveCanvasAnimation = null;
+
+    }
+
         if (APP_CONFIG.DEV_MODE) {
             devPreview.classList.add("hidden");
             cameraPreview.classList.remove("hidden");
@@ -659,6 +692,42 @@ document.addEventListener("DOMContentLoaded", () => {
         capturedPhoto.src = photoCanvas.toDataURL("image/png");
 
     }
+
+    let liveCanvasAnimation = null;
+
+        function startLiveCanvasPreview() {
+
+            photoCanvas.classList.remove("hidden");
+            cameraPreview.classList.add("hidden");
+
+            const ctx = photoCanvas.getContext("2d");
+
+            function render() {
+
+                if (!APP_STATE.currentStream) return;
+
+                photoCanvas.width =
+                    cameraPreview.videoWidth;
+
+                photoCanvas.height =
+                    cameraPreview.videoHeight;
+
+                ctx.drawImage(
+                    cameraPreview,
+                    0,
+                    0,
+                    photoCanvas.width,
+                    photoCanvas.height
+                );
+
+                liveCanvasAnimation =
+                    requestAnimationFrame(render);
+
+            }
+
+            render();
+
+        }
 
 
     // =====================================================
