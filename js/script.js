@@ -397,6 +397,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             await cameraPreview.play();
 
+            alert("VIDEO PLAYED");
+
+            console.log("VIDEO PLAYED");
+
+            startLiveCanvasPreview();
+
             const rect = cameraPreview.getBoundingClientRect();
 
             console.log("Video Diagnostics", {
@@ -412,8 +418,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 objectFit: getComputedStyle(cameraPreview).objectFit,
                 transform: getComputedStyle(cameraPreview).transform
             });
-
-            startLiveCanvasPreview();
 
             const track = APP_STATE.currentStream.getVideoTracks()[0];
             const settings = track.getSettings();
